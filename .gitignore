@@ -26,3 +26,4 @@ venv.bak/
 .vscode/
 # JetBrains Rider
 *.iml
+*.coverage
