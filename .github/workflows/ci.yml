@@ -26,5 +26,23 @@ jobs:
       - name: Flake8
         run: flake8 .
 
-      - name: Run tests
-        run: pytest -q
+      - name: Run tests with coverage
+        run: |
+          coverage run -m pytest
+          coverage xml
+          coverage html
+          coverage report -m
+
+      # 6. Сохраняем XML как артефакт
+      - name: Upload XML coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-xml
+          path: coverage.xml
+
+      # 7. Сохраняем HTML-отчёт как артефакт
+      - name: Upload HTML coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-html
+          path: htmlcov
